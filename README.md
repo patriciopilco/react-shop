@@ -230,7 +230,7 @@ https://marketplace.visualstudio.com/items?itemName=dsznajder.es7-react-js-snipp
 1. Crear directorio */src/containers*
 2. Crear archivo */src/containers/Login.jsx* 
 
- * crear componentente tipo Stateless, utilizar el shorcut *src* react stateless
+ * crear componentente tipo Stateless, utilizar el shorcut *rsc* react stateless
 
 ```bash
 import React from 'react';
@@ -296,7 +296,7 @@ export default Layout;
 ```
 
 
-6. Crear archivo /src/styles/Login.scss
+5. Crear archivo /src/styles/Login.scss
 
 ```bash
   @import url(_vars.scss);
@@ -371,7 +371,7 @@ export default Layout;
   }
 ```
 
-7. Cambiar module rules 
+6. Cambiar module rules 
 
 ```bash
             {
@@ -382,4 +382,93 @@ export default Layout;
                     'sass-loader'
                 ]
             }
+```
+
+7. Cambiar archivo *App.jsx*
+
+```bash
+import React from 'react';
+import Layout from '../containers/Layout';
+import Login from '../containers/Login';
+import '../styles/global.css';
+
+const App = () => {
+    return (
+		<Layout>
+			<Login />
+		</Layout>
+	);
+}
+
+export default App;
+```
+
+## React Router DOM
+
+Nos permite separar el proyecto en diferentes secciones
+
+1. Instalar el complemento para separar las páginas de nuestra sección
+
+```bash
+npm install react-router-dom
+```
+
+2. Realizar la configuración
+
+* Crear carpeta */src/routes*
+* Mover App.jsx a la carpeta */src/routes*
+* Crear importe de recursos de *react-router-dom* como es BrowserRouter,Switch,Route
+
+3. Encapsular por niveles la aplicación
+
+3.1 Encapsular la aplicación en el primer nivel *BrowserRouter*, segundo nivel *Routes*, tercer nivel *Route*
+```bash
+import React from 'react';
+import { BrowserRouter,Routes,Route } from 'react-router-dom'
+import Login from '../containers/Login';
+import Home from '../containers/Home';
+import RecoveryPassword  from '../containers/RecoveryPassword'
+import NotFound from '../containers/NotFound';
+import '../styles/global.css';
+
+const App = () => {
+    return (
+		<BrowserRouter>
+			<Layout>
+				<Routes>
+					<Route exact path="/" element={<Home />} />
+					<Route exact path="/login" element={<Login />} />			
+					<Route exact path="/recovery-password" element={<RecoveryPassword />} />
+					<Route path="*" element={<NotFound />} />
+				</Routes>
+			</Layout>
+		</BrowserRouter>
+	);
+}
+
+export default App;
+```
+
+4. Crear Secciones Home, NotFount
+5. Añadir configuración de rutas en el archivo *webpack.config.js*
+
+* Añadir *publicPath* 
+```bash
+    output: {
+        path: path.resolve(__dirname, 'dist'),
+        filename: 'bundle.js',
+        publicPath: '/'
+    },
+```
+
+* Añadir *historyApiFallback* para el ambiente de desarrollo
+```bash
+ devServer: {
+        historyApiFallback: true,
+        static: {
+            directory: path.join(__dirname, "dist")
+          },
+        compress: true,
+        port: 3006
+      }
 ```
