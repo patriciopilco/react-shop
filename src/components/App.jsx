@@ -1,6 +1,14 @@
-import React from "react";
-import '../styles/global.scss';
+import React from 'react';
+import Layout from '../containers/Layout';
+import Login from '../containers/Login';
+import '../styles/global.css';
 
-const App = () =><h1>Hello React !</h1>
+const App = () => {
+    return (
+		<Layout>
+			<Login />
+		</Layout>
+	);
+}
 
 export default App;

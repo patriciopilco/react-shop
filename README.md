@@ -2,9 +2,9 @@
 
 ##Instalación inicial
 1. crear carpeta react-shop
-```bash
+
 mkdir react-shop
-```bash
+
 
 2. Inicializar
 * git init
@@ -202,7 +202,6 @@ filename: '[name].css'
 }),
 
 ```
-
 3. Crear directorio */src/styles*
 4. Crear archivo */src/styles/global.scss*
 
@@ -222,6 +221,165 @@ import '../styles/global.scss';
 ```
 
 
+## HTML y CSS en componentes de React
+
+Instalar en VCode
+
+https://marketplace.visualstudio.com/items?itemName=dsznajder.es7-react-js-snippets
+
+1. Crear directorio */src/containers*
+2. Crear archivo */src/containers/Login.jsx* 
+
+ * crear componentente tipo Stateless, utilizar el shorcut *src* react stateless
+
+```bash
+import React from 'react';
+import '../styles/Login.scss';
+
+const Login = () => {
+	return (
+		<div className="login">
+			<div className="form-container">
+				<img src="./logos/logo_yard_sale.svg" alt="logo" className="logo" />
+				<h1 className="title">Create a new password</h1>
+				<p className="subtitle">Enter a new passwrd for yue account</p>
+				<form action="/" className="form">
+					<label for="password" className="label">Password</label>
+					<input type="password" id="password" placeholder="*********" className="input input-password" />
+					<label for="new-password" className="label">Password</label>
+					<input type="password" id="new-password" placeholder="*********" className="input input-password" />
+					<input type="submit" value="Confirm" className="primary-button login-button" />
+				</form>
+			</div>
+		</div>
+	);
+}
+```
+
+2. Crear archivo */src/containers/Layout.jsx* 
+
+```bash
+import React from 'react';
+
+const Layout = ({ children }) => {
+	return (
+		<div className="Layout">
+			{children}
+		</div>
+	);
+}
+
+export default Layout;
+```
+3. Crear archio /src/styles/_vars.scss
+```bash
+:root {
+      --white: #FFFFFF;
+      --black: #000000;
+      --very-light-pink: #C7C7C7;
+      --text-input-field: #F7F7F7;
+      --hospital-green: #ACD9B2;
+      --sm: 14px;
+      --md: 16px;
+      --lg: 18px;
+    }
+
+```
+
+4. Editar *global.css*
+
+```bash
+  body {
+    margin: 0;
+    font-family: 'Quicksand', sans-serif;
+  }
+```
 
 
+6. Crear archivo /src/styles/Login.scss
 
+```bash
+  @import url(_vars.scss);
+
+  .login {
+    width: 100%;
+    height: 100vh;
+    display: grid;
+    place-items: center;
+  }
+  .form-container {
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    width: 300px;
+  }
+  .logo {
+    width: 150px;
+    margin-bottom: 48px;
+    justify-self: center;
+    display: none;
+  }
+  .title {
+    font-size: var(--lg);
+    margin-bottom: 12px;
+    text-align: center;
+  }
+  .subtitle {
+    color: var(--very-light-pink);
+    font-size: var(--md);
+    font-weight: 300;
+    margin-top: 0;
+    margin-bottom: 32px;
+    text-align: center;
+  }
+  .form {
+    display: flex;
+    flex-direction: column;
+  }
+  .label {
+    font-size: var(--sm);
+    font-weight: bold;
+    margin-bottom: 4px;
+  }
+  .input {
+    background-color: var(--text-input-field);
+    border: none;
+    border-radius: 8px;
+    height: 30px;
+    font-size: var(--md);
+    padding: 6px;
+    margin-bottom: 12px;
+  }
+  .primary-button {
+    background-color: var(--hospital-green);
+    border-radius: 8px;
+    border: none;
+    color: var(--white);
+    width: 100%;
+    cursor: pointer;
+    font-size: var(--md);
+    font-weight: bold;
+    height: 50px;
+  }
+  .login-button {
+    margin-top: 14px;
+    margin-bottom: 30px;
+  }
+  @media (max-width: 640px) {
+    .logo {
+      display: block;
+    }
+  }
+```
+
+7. Cambiar module rules 
+
+```bash
+            {
+                test: /\.(css|scss)$/,
+                use: [
+                    'style-loader',
+                    'css-loader',
+                    'sass-loader'
+                ]
+            }
+```
