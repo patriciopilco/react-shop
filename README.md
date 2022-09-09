@@ -472,3 +472,12 @@ export default App;
         port: 3006
       }
 ```
+
+## Atomic Design
+
+https://platzi.com/blog/por-que-atomic-design/
+
+
+
+
+
