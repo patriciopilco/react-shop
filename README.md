@@ -477,7 +477,36 @@ export default App;
 
 https://platzi.com/blog/por-que-atomic-design/
 
+https://atomicdesign.bradfrost.com/chapter-2/
 
 
 
+## Añadir archivos de enlace
+
+1. Crear carpeta */src/assets*
+2. Copiar iconos e imágenes 
+3. Editar *webpack.config.js* * con una nueva regla
+```bash
+            {
+                test: /\.(png|svg|jpg|gif)$/,
+                type: 'asset'
+            }
+```
+* Agrear alias en resolve
+```bash
+alias: {
+  '@components': path.resolve(__dirname, 'src/components/'),
+  '@containers': path.resolve(__dirname, 'src/containers/'),
+  '@styles': path.resolve(__dirname, 'src/styles/'),
+  '@icons': path.resolve(__dirname, 'src/assets/icons/'),
+  '@logos': path.resolve(__dirname, 'src/assets/logos/'),
+}
+```
+
+* Importamos los recursos desde el archivo .jsx haciendo uso de los alias para que webpack pueda reconocer
+
+```bash
+import '@styles/Header.scss'
+import shoppingCart from '@icons/icon_shopping_cart.svg';
+```
 
