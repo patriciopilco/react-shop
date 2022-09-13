@@ -510,3 +510,44 @@ import '@styles/Header.scss'
 import shoppingCart from '@icons/icon_shopping_cart.svg';
 ```
 
+## React.useState
+
+El estado dentro de react
+1. Importar *useState* que permite trabajar con el estado, en este caso es un huk que viene en la api de react.
+
+```bash
+import React, { useState } from 'react';
+```
+2. Añadir la lógica antes del return
+
+Crear una constante que contenga lo siguiente:
+
+* estado
+* funcion modificadora al elemento del estado
+
+Luego se debe pasar el valir inicial al elemento 
+
+* ejemplo se pasa un arreglo
+
+```bash
+const [cart,setCart] = useState([]);
+
+```
+
+* añadir la configuracion dentro del elemento <figure>, capturando con *onClick* para poder desencadenar algo, en nuestro caso el llamado a una función.
+
+* Crear la función *handleClick* por convension 
+
+```bash
+    const handleClick = () => {
+        setCart();
+    }
+```
+
+* usar la función
+
+```bash
+				<figure onClick={ handleClick }>
+					<img src={addToCart} alt="" />
+				</figure>
+```
