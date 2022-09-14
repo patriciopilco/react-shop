@@ -6,7 +6,7 @@ const ProductItem = () => {
 
     const [cart,setCart] = useState([]);
     const handleClick = () => {
-        setCart();
+        setCart([]);
     }
 
     return (
