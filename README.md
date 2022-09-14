@@ -551,3 +551,86 @@ const [cart,setCart] = useState([]);
 					<img src={addToCart} alt="" />
 				</figure>
 ```
+
+## useEffect y consumo de APIs
+
+Realizar peticiones a una API y hacer render con los productos de la tienda.
+
+* Docs de la API 👉 https://api.escuelajs.co/docs/
+* API para desarrollo 👉 https://api.escuelajs.co/api/v1/
+
+1. Añadir API
+
+```bash
+const API = 'https://api.escuelajs.co/api/v1/products';
+
+```
+
+2. Añadir useEffect
+
+* importar los elementos *useEffect*,*useState* desde la api de react
+
+```bash
+import React, { useEffect, useState } from 'react';
+```
+3. Llamar la información dentro del contenedor
+
+* Crear *useState*
+```bash
+    const[products, setProducts] = useState([]);
+```
+
+* Crear una funcion anomina con *useEffect*
+
+```bash
+    useEffect(()=>{
+
+    },[])
+```
+4. Instalar axios
+
+```bash
+npm install axios
+```
+
+5. Importar axios
+
+```bash
+import axios from 'axios';
+```
+6. Construir la petición a la API.
+
+```bash
+    useEffect(async()=>{
+        const response = await axios(API);
+        setProducts(response.data);
+    },[])
+```
+
+7. Añadir lógica para iterar
+
+```bash
+ return (
+        <section className='main-container'>
+            <div className='ProductList'>
+                {
+                    products.map(
+                        product => (
+                            <ProductItem/>
+                    ))}
+            </div>
+        </section>
+    );
+```
+
+8. Instalar plugin a babel para no tener problemas en la peticion async await
+
+```bash
+npm install @babel/plugin-transform-runtime
+``` 
+9. Aplicar la configuración *.babelrc*
+
+``bash
+
+```
+
