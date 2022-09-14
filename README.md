@@ -630,7 +630,60 @@ npm install @babel/plugin-transform-runtime
 ``` 
 9. Aplicar la configuración *.babelrc*
 
-``bash
-
+```bash
+    "plugins": [
+        "@babel/plugin-transform-runtime"
+    ]
 ```
 
+## Custom Hooks
+
+1. crear carpeta *src/hooks*
+2. crear funcion de código que sea reutilizable *useGetProducts.js*
+
+```bash
+import { useEffect, useState } from "react";
+import axios from 'axios';
+
+const useGetProducts = (API) => {
+
+    const[products, setProducts] = useState([]);
+
+    useEffect(async()=>{
+        const response = await axios(API);
+        setProducts(response.data);
+    },[])
+
+    return products;
+};
+
+export default useGetProducts;
+```
+
+3. Usar funcion en el componente
+
+```bash
+import React, { useEffect, useState } from 'react';
+import ProductItem from '@components/ProductItem';
+import '@styles/ProductList.scss';
+import useGetProducts from '../hooks/useGetProducts';
+
+const API = 'https://api.escuelajs.co/api/v1/products';
+
+const ProductList = () => {
+    const products = useGetProducts(API);
+    return (
+        <section className='main-container'>
+            <div className='ProductList'>
+                {
+                    products.map(
+                        (product) => (
+                            <ProductItem/>
+                    ))}
+            </div>
+        </section>
+    );
+};
+
+export default ProductList;
+```
