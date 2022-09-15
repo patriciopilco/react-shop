@@ -687,3 +687,39 @@ const ProductList = () => {
 
 export default ProductList;
 ```
+
+## Custom Hooks 
+
+1. Inyectar los valor al componente *ProductItem*
+```bash
+ <section className='main-container'>
+            <div className='ProductList'>
+            {products.map(product => <ProductItem product={product} key={product.id}/>)}
+            </div>
+        </section>
+```
+
+2. Personalizar *ProductItem* con el parametro **product**
+
+```bash
+const ProductItem = ({product}) => {
+    const [cart,setCart] = useState([]);
+    const handleClick = () => {
+        setCart([]);
+    }
+    return (
+        <div className="ProductItem">
+			<img src={product.images[0]} alt="" />
+			<div className="product-info">
+				<div>
+					<p>{product.price}</p>
+					<p>{product.title}</p>
+				</div>
+				<figure onClick={ handleClick }>
+					<img src={addToCart} alt="" />
+				</figure>
+			</div>
+		</div>
+    );
+};
+```
