@@ -723,3 +723,53 @@ const ProductItem = ({product}) => {
     );
 };
 ```
+
+## useRef y formularios (Página Login)
+
+UseRef es un hook utilizado para obtener una referencia a los datos de un objeto con información mutable
+
+Lectura - 
+https://developer.mozilla.org/en-US/docs/Web/API/FormData
+
+1. Modificar la página de login
+* Importar **UseRef** 
+* Crear un constante y dar el valor nulo
+```bash
+	const form = useRef(null);
+```
+* Crear la referencia 
+```bash
+  <form action="/" className="form" ref={form}>
+```
+* Crear una funcion para trabajar con **formData** utilizado en el (Submit) por seguridad de la información se recomienda este método.
+
+```bash
+	const handleSubmit = (event) => {
+		event.preventDefault();
+		const formData = new FormData(form.current);
+		const data = {
+			usename: formData.get('email'),
+			password: formData.get('password')
+		}
+		console.log(data);
+	}
+```
+
+* En el html se debe referenciar los id por medio del atributo **name**
+```bash
+<input type="text" name="email" placeholder="platzi@example.cm" className="input input-email" />
+```
+* Añadir el evento *onClick* al boton para llamar a la funcion **handleSubmit**
+```bash
+
+					<button
+						onClick={handleSubmit}
+						className="primary-button login-button">
+						Log in
+					</button>
+```
+* Evitar que los valores se envien por URL usando el evento **preventDefault**
+```bash
+	const handleSubmit = (event) => {
+		event.preventDefault();
+```
