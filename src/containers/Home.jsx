@@ -4,7 +4,6 @@ import ProductList from './ProductList';
 
 const Home = () => {
     return (
-        //<Header></Header>
         <ProductList/>
     );
 };

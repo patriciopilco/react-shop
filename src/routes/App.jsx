@@ -6,9 +6,13 @@ import Home from '../containers/Home';
 import RecoveryPassword  from '../containers/RecoveryPassword'
 import NotFound from '../containers/NotFound';
 import '../styles/global.css';
+import AppContext from '../context/AppContext';
+import useInitialState from '../hooks/useInitialState';
 
 const App = () => {
+	const initialState = useInitialState();
     return (
+		<AppContext.Provider value={initialState}>
 		<BrowserRouter>
 			<Layout>
 				<Routes>
@@ -19,6 +23,7 @@ const App = () => {
 				</Routes>
 			</Layout>
 		</BrowserRouter>
+		</AppContext.Provider>
 	);
 }
 
